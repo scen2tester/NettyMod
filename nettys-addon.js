@@ -1,4 +1,9 @@
 "# NettyMod" 
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 elements.bouncy_bomb = {
     color: "#ff0000",
     category: "weapons",
@@ -89,3 +94,25 @@ elements.crawl = {
         "super_powder": { elem1: "ultra_uranium", elem2: "null" },
     }
 };
+
+var placed = false
+
+elements.time_bomb = {
+    color: "#f00000",
+    behavior: behaviors.STURDYPOWDER,
+    state: "solid",
+    category: "weapons",
+    tick: function (pixel) {
+        if (placed == false) {
+            placed = true
+            start = pixelTicks
+        }
+        console.log("placed:" + placed)
+        console.log("start:" + start)
+        console.log("tickslived:" + pixelTicks)
+        if (pixelTicks == start + 100) {
+            changePixel(pixel, "explosion")
+            sleep(1000).then(() => { placed = false })
+        }
+    }
+}
