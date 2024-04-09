@@ -116,3 +116,36 @@ elements.time_bomb = {
         }
     }
 }
+
+
+// made this in school, cant test it, so uh here (ill be on in 4pm)
+elements.death_star = {
+  color: ["#E81C1C","#252121"],
+  behavior: behaviors.FLY,
+  tick: function(pixel) {
+   tryMove(pixel,pixel.x+1,pixel.y);
+   createPixel("blaster", pixel.x, pixel.y+10);
+  },
+hardness: 1,
+temp: 100,
+tempHigh: 5000,
+stateHigh: "magma",
+density: 900,
+  category: "weapons",
+};
+elements.ultra_freeze = {
+  color: ["#3AACCC","#11EBE9"],
+  behavior: behaviors.RAD_LIQUID,
+  temp: -90000000000,
+  tick: function(pixel) {
+    if (Math.random() < 0.5) {createPixel("ultra_freeze", pixel.x, pixel.y);}
+  },
+  reactions: {
+        "rock_wall": { elem1: "permafrost", elem2: "cold_fire" },
+        "dirt": { elem1: "permafrost", elem2: "cold_fire" },
+        "sand": { elem1: "permafrost", elem2: "cold_fire" },
+        "mud": { elem1: "permafrost", elem2: "cold_fire" },
+        "water": { elem1: "permafrost", elem2: "cold_fire" },
+  },
+  category: "weapons", 
+};
